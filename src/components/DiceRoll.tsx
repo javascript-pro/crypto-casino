@@ -1,9 +1,29 @@
 'use client'
 
-import { useState } from 'react'
-import { useAccount, useWriteContract, useWatchContractEvent } from 'wagmi'
+import { useState, useEffect, useRef } from 'react'
+import {
+  useAccount,
+  useWriteContract,
+  useWatchContractEvent,
+} from 'wagmi'
 import { keccak256, toBytes } from 'viem'
 import { diceGameContract } from '@/lib/contracts'
+
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Button,
+  Typography,
+  Stack,
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  Box,
+} from '@mui/material'
+
+const diceFaces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅']
 
 export default function DiceRoll() {
   const { address, isConnected } = useAccount()
@@ -13,6 +33,10 @@ export default function DiceRoll() {
   const [revealed, setRevealed] = useState(false)
   const [roll, setRoll] = useState<number | null>(null)
   const [log, setLog] = useState<string[]>([])
+  const [rolling, setRolling] = useState(false)
+  const [emoji, setEmoji] = useState('🎲')
+
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
   const appendLog = (line: string) => setLog((prev) => [...prev, line])
 
@@ -27,6 +51,8 @@ export default function DiceRoll() {
     setRoll(null)
     setCommitted(false)
     setRevealed(false)
+    setLog([])
+    setEmoji('🎲')
     appendLog(`🔐 Seed generated: ${s}`)
     appendLog(`📦 Hash: ${h}`)
   }
@@ -51,64 +77,97 @@ export default function DiceRoll() {
     })
     setRevealed(true)
     appendLog('🔍 Reveal transaction sent.')
+    startRolling()
   }
 
-  // Listen for the Reveal event
+  const startRolling = () => {
+    setRolling(true)
+    intervalRef.current = setInterval(() => {
+      const random = Math.floor(Math.random() * 6)
+      setEmoji(diceFaces[random])
+    }, 100)
+  }
+
+  const stopRolling = (finalRoll: number) => {
+    if (intervalRef.current) clearInterval(intervalRef.current)
+    setEmoji(diceFaces[finalRoll - 1])
+    setRolling(false)
+  }
+
+  // Watch Reveal event
   useWatchContractEvent({
     ...diceGameContract,
     eventName: 'Reveal',
     listener(logs) {
       const result = (logs[0] as any).args?.roll
-      setRoll(Number(result))
-      appendLog(`🎉 Dice rolled: ${result}`)
+      const value = Number(result)
+      setRoll(value)
+      appendLog(`🎉 Dice rolled: ${value}`)
+      stopRolling(value)
     },
   })
 
   return (
-    <div className="mt-8 p-4 border rounded max-w-md space-y-4">
-      <h2 className="text-xl font-bold">🎲 Provably Fair Dice Game</h2>
+    <Card variant="outlined">
+      <CardHeader title="🎲 Provably Fair Dice Game" />
+      <CardContent>
+        <Stack spacing={3}>
+          <Box display="flex" justifyContent="center" fontSize="4rem">
+            {emoji}
+          </Box>
 
-      {!seed && (
-        <button
-          onClick={generateSeed}
-          className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-        >
-          Generate Seed
-        </button>
-      )}
+          {!seed && (
+            <Button variant="contained" onClick={generateSeed}>
+              Generate Seed
+            </Button>
+          )}
 
-      {seed && !committed && (
-        <button
-          onClick={handleCommit}
-          disabled={committing}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          {committing ? 'Committing…' : 'Send Commit Transaction'}
-        </button>
-      )}
+          {seed && !committed && (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleCommit}
+              disabled={committing}
+            >
+              {committing ? 'Committing…' : 'Send Commit Transaction'}
+            </Button>
+          )}
 
-      {committed && !revealed && (
-        <button
-          onClick={handleReveal}
-          disabled={revealing}
-          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-        >
-          {revealing ? 'Revealing…' : 'Send Reveal Transaction'}
-        </button>
-      )}
+          {committed && !revealed && (
+            <Button
+              variant="contained"
+              color="success"
+              onClick={handleReveal}
+              disabled={revealing}
+            >
+              {revealing ? 'Revealing…' : 'Send Reveal Transaction'}
+            </Button>
+          )}
 
-      {roll && (
-        <div className="text-lg font-semibold">🎯 Final Result: {roll}</div>
-      )}
+          {roll && !rolling && (
+            <Typography variant="h6" color="secondary" textAlign="center">
+              🎯 Final Result: {roll}
+            </Typography>
+          )}
 
-      <div className="mt-4 text-sm text-gray-700">
-        <h3 className="font-semibold mb-1">Log:</h3>
-        <ul className="list-disc list-inside space-y-1">
-          {log.map((line, i) => (
-            <li key={i}>{line}</li>
-          ))}
-        </ul>
-      </div>
-    </div>
+          <Divider />
+
+          {log.length > 0 && (
+            <Box>
+              <Typography variant="subtitle1" gutterBottom>
+                Log
+              </Typography>
+              <List dense>
+                {log.map((line, i) => (
+                  <ListItem key={i} disablePadding>
+                    <ListItemText primary={line} />
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+          )}
+        </Stack>
+      </CardContent>
+    </Card>
   )
 }

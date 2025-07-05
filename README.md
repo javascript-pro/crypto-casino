@@ -2,7 +2,6 @@
 
 A Web3-enabled demo app that simulates a provably fair dice game using smart contracts and modern frontend tools. Built with **Next.js (App Router)**, **wagmi**, **viem**, **RainbowKit**, and **Hardhat**.
 
----
 
 ## 🧱 Tech Stack
 
@@ -14,7 +13,6 @@ A Web3-enabled demo app that simulates a provably fair dice game using smart con
 | Smart Contract | Solidity (DiceGame.sol)                      |
 | Dev Tools    | Ethers v6, Hardhat Toolbox, React Query        |
 
----
 
 ## 🚀 Features
 
@@ -24,14 +22,13 @@ A Web3-enabled demo app that simulates a provably fair dice game using smart con
 - 🪄 Automatic UI updates from `Reveal` events
 - 🧪 Fully functional local development with test accounts
 
----
 
 ## 🛠️ Getting Started
 
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/crypto-casino.git
+git clone https://github.com/javascript-pro/crypto-casino.git
 cd crypto-casino
 ```
 
@@ -72,7 +69,6 @@ yarn dev
 
 Visit [http://localhost:3000](http://localhost:3000)
 
----
 
 ## 🔑 Wallet Setup (MetaMask)
 
@@ -85,7 +81,6 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 2. Import an account using one of the private keys shown by `npx hardhat node`
 
----
 
 ## 🧠 How the Game Works
 
@@ -97,7 +92,6 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 This pattern simulates **provably fair randomness**, where the seed is secret until revealed, but verifiable after the fact.
 
----
 
 ## 📁 Project Structure
 
@@ -114,7 +108,6 @@ src/
     contracts.ts        # Contract ABI + address
 ```
 
----
 
 ## 📜 Smart Contract: `DiceGame.sol`
 
@@ -124,7 +117,6 @@ function reveal(string memory _seed) external;
 event Reveal(address indexed player, uint8 roll, string seed);
 ```
 
----
 
 ## 📦 Commands Reference
 
@@ -134,7 +126,6 @@ event Reveal(address indexed player, uint8 roll, string seed);
 | `npx hardhat node`              | Run local blockchain                     |
 | `npx hardhat run scripts/deploy.js --network localhost` | Deploy contract |
 
----
 
 ## 🧪 Next Steps
 
@@ -144,7 +135,6 @@ event Reveal(address indexed player, uint8 roll, string seed);
 - [ ] Add unit tests for contract
 - [ ] Add UI animation for dice roll
 
----
 
 ## 📄 License
 
