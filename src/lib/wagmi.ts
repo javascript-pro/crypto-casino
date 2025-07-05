@@ -1,12 +1,26 @@
-// src/lib/wagmi.ts
-'use client'
+import { http, createConfig } from 'wagmi'
+import { Chain } from 'wagmi/chains'
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 
-import { getDefaultConfig } from '@rainbow-me/rainbowkit'
-import { sepolia } from 'wagmi/chains'
+export const localhost = {
+  id: 31337,
+  name: 'Hardhat Local',
+  network: 'localhost',
+  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ['http://127.0.0.1:8545'],
+    },
+    public: {
+      http: ['http://127.0.0.1:8545'],
+    },
+  },
+} as const satisfies Chain
 
-export const wagmiConfig = getDefaultConfig({
-  appName: 'Crypto Casino',
-  projectId: 'cd11547ef620c5f14df9e61556b1428f',
-  chains: [sepolia],
+export const wagmiConfig = createConfig({
+  chains: [localhost],
+  transports: {
+    [localhost.id]: http(),
+  },
   ssr: true,
 })
