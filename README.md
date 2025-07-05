@@ -1,36 +1,151 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎰 Crypto Casino
 
-## Getting Started
+A Web3-enabled demo app that simulates a provably fair dice game using smart contracts and modern frontend tools. Built with **Next.js (App Router)**, **wagmi**, **viem**, **RainbowKit**, and **Hardhat**.
 
-First, run the development server:
+---
+
+## 🧱 Tech Stack
+
+| Layer        | Tech Used                                      |
+|--------------|------------------------------------------------|
+| Frontend     | Next.js (App Router), Tailwind CSS, TypeScript |
+| Wallet       | RainbowKit + wagmi + viem                      |
+| Blockchain   | Local Ethereum blockchain (Hardhat)            |
+| Smart Contract | Solidity (DiceGame.sol)                      |
+| Dev Tools    | Ethers v6, Hardhat Toolbox, React Query        |
+
+---
+
+## 🚀 Features
+
+- 🔐 Wallet connection with MetaMask / WalletConnect
+- 🎲 Provably fair dice game using KECCAK-256 hash
+- 📡 Smart contract interactions (commit + reveal)
+- 🪄 Automatic UI updates from `Reveal` events
+- 🧪 Fully functional local development with test accounts
+
+---
+
+## 🛠️ Getting Started
+
+### 1. Clone the Repo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/YOUR_USERNAME/crypto-casino.git
+cd crypto-casino
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Start Local Blockchain
 
-## Learn More
+```bash
+npx hardhat node
+```
 
-To learn more about Next.js, take a look at the following resources:
+This runs a local Ethereum network on `http://127.0.0.1:8545`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Deploy the Smart Contract
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+In a second terminal tab:
 
-## Deploy on Vercel
+```bash
+npx hardhat run scripts/deploy.js --network localhost
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Copy the address printed in the output and paste it into:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```ts
+// src/lib/contracts.ts
+export const DICE_GAME_ADDRESS = '0x...'
+```
+
+### 5. Run the Frontend
+
+```bash
+yarn dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🔑 Wallet Setup (MetaMask)
+
+1. Add a **Custom Network** in MetaMask:
+   ```
+   Name: Hardhat Localhost
+   RPC URL: http://127.0.0.1:8545
+   Chain ID: 31337
+   ```
+
+2. Import an account using one of the private keys shown by `npx hardhat node`
+
+---
+
+## 🧠 How the Game Works
+
+1. **Generate a random seed** client-side
+2. Compute the **KECCAK-256 hash** of the seed
+3. Call `commit(hash)` on the contract
+4. Later, call `reveal(seed)` to verify the hash
+5. The contract emits a `Reveal` event with your dice roll result (1–6)
+
+This pattern simulates **provably fair randomness**, where the seed is secret until revealed, but verifiable after the fact.
+
+---
+
+## 📁 Project Structure
+
+```
+contracts/
+  DiceGame.sol          # Solidity smart contract
+scripts/
+  deploy.js             # Hardhat deploy script
+src/
+  app/                  # Next.js App Router entry
+  components/           # UI components
+  lib/
+    wagmi.ts            # wagmi config with local chain
+    contracts.ts        # Contract ABI + address
+```
+
+---
+
+## 📜 Smart Contract: `DiceGame.sol`
+
+```solidity
+function commit(bytes32 _commitment) external;
+function reveal(string memory _seed) external;
+event Reveal(address indexed player, uint8 roll, string seed);
+```
+
+---
+
+## 📦 Commands Reference
+
+| Command                         | Description                              |
+|----------------------------------|------------------------------------------|
+| `yarn dev`                      | Start the frontend                       |
+| `npx hardhat node`              | Run local blockchain                     |
+| `npx hardhat run scripts/deploy.js --network localhost` | Deploy contract |
+
+---
+
+## 🧪 Next Steps
+
+- [ ] Add loading/confirmation states
+- [ ] Auto-reveal after delay
+- [ ] Deploy to Sepolia
+- [ ] Add unit tests for contract
+- [ ] Add UI animation for dice roll
+
+---
+
+## 📄 License
+
+MIT — for educational and demo purposes only.
