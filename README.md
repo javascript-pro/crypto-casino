@@ -1,5 +1,90 @@
 # 🎰 Crypto Casino
 
+
+# 🎰 Crypto Casino – Technology Overview (Non-Technical)
+
+This demo simulates a simple online dice game where users connect their cryptocurrency wallet, roll a dice, and see the result. Behind the scenes, it uses modern tools to make sure the game is **fair**, **secure**, and **transparent**.
+
+---
+
+## 💻 Website Frontend
+
+### ✅ Next.js  
+Modern framework for building fast and efficient websites. It powers the structure and navigation of our app.
+
+### ✅ React  
+Helps us build reusable UI components like buttons, forms, and displays.
+
+### ✅ MUI (Material UI)  
+A design system that provides clean, responsive UI elements like cards, buttons, and grids.
+
+---
+
+## 🦊 Crypto Integration
+
+### ✅ RainbowKit + WalletConnect  
+Enables users to connect their cryptocurrency wallets (like MetaMask) to the app.
+
+### ✅ wagmi  
+A toolkit that makes it easy to send transactions and talk to the blockchain from our React app.
+
+### ✅ viem  
+Performs cryptographic operations like hashing, which we use to make the dice game provably fair.
+
+---
+
+## 🎲 Provably Fair Dice Game
+
+We ensure fairness through this process:
+
+1. User generates a secret number (seed)
+2. The app creates a hash of the seed and sends it to the blockchain
+3. Later, the seed is revealed and verified
+4. The result is calculated from the original seed
+
+This approach proves the result wasn’t tampered with — even by the developer.
+
+---
+
+## ⚙️ Smart Contracts
+
+### ✅ Solidity  
+The programming language used to write the blockchain-based game logic.
+
+### ✅ Hardhat  
+A tool that runs a local Ethereum blockchain on your computer. It’s perfect for testing contracts before going live.
+
+---
+
+## 🧪 Development Tools
+
+### ✅ TypeScript  
+Adds better error checking to JavaScript. Helps developers catch mistakes early.
+
+### ✅ Vercel  
+Hosts the finished app so anyone can access it online. Fast and scalable.
+
+---
+
+## 📋 Technology Summary
+
+| Area              | Technology            | Purpose                                                   |
+|-------------------|------------------------|------------------------------------------------------------|
+| Website           | Next.js + React        | Build and organize the frontend interface                  |
+| Design            | MUI                    | Professional, responsive UI components                     |
+| Wallet Connect    | RainbowKit + WalletConnect | Let users connect crypto wallets                       |
+| Blockchain Access | wagmi + viem           | Communicate securely with Ethereum                         |
+| Game Logic        | Solidity               | Code the rules of the game on the blockchain               |
+| Local Dev Chain   | Hardhat                | Simulate blockchain for testing                            |
+| Hosting           | Vercel                 | Make the app live on the internet                          |
+
+---
+
+## 📝 Summary
+
+Crypto Casino is a showcase of how modern web and blockchain tools can work together to create a fully transparent, user-controlled game. Every roll is verifiable, and every action is owned by the user.
+
+
 A Web3-enabled demo app that simulates a provably fair dice game using smart contracts and modern frontend tools. Built with **Next.js (App Router)**, **wagmi**, **viem**, **RainbowKit**, and **Hardhat**.
 
 
