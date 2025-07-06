@@ -1,14 +1,14 @@
 ## Blockchain iGaming Experience
 
-> What draws me to blockchain iGaming and Web3 is the combination of technical ambition and product focus — I like working in gaming, crypto, and DeFi, and solving real-world UX challenges at scale
+> What I like about blockchain iGaming and Web3 is the combination of technical ambition and product focus — I like working in gaming, crypto, and DeFi, and solving real-world UX challenges at scale
 
-I’m a Senior Fullstack JavaScript Dev, focused on building high-performing frontend applications using React and TypeScript. Most relevantly, I recently worked with a Maltese iGaming company — where I contributed to the development of a crypto casino platform.
+I’m a Senior Fullstack JavaScript Dev, focused on building high-performing frontend applications using React and TypeScript. 
 
-That project had no fiat onramps, no KYC, and no banks — users could deposit and withdraw Bitcoin directly, and the games were provably fair.
+Most relevantly, I recently worked with a Maltese iGaming company — where I contributed to the development of a crypto casino platform. That project had no fiat onramps, no KYC, and no banks — users could deposit and withdraw Bitcoin directly, and the games were provably fair.
 
 I was brought on to help shape the frontend architecture, and we built everything from scratch — wallet integrations, animations, real-time UI updates, and a clean user experience tuned for conversion. It was a fast-paced environment, with a small team and a lot of freedom to make technical decisions.
 
-Before that, I’ve worked across a range of industries — and led frontend teams, shipped PWAs, and built full platforms using modern CI/CD and containerized deployments. I’m especially interested in modular, composable frontend systems and collaborative product development.
+I’ve also worked across a range of industries, led frontend teams, shipped PWAs, and built full platforms using modern CI/CD and containerized deployments. I’m especially interested in modular, composable frontend systems and collaborative product development.
 
 ## Crypto Casino Project – Technology Overview (Non-Technical)
 
