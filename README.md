@@ -1,6 +1,8 @@
-# Blockchain iGaming
+## Blockchain iGaming Experience
 
-I’m a senior JavaScript developer with over 20 years of experience, currently focused on building high-performance frontend applications using React and TypeScript. Most relevantly, I worked with a Maltese iGaming company — where I contributed to the development of a crypto casino platform.
+> What draws me to blockchain iGaming and Web3 is the combination of technical ambition and product focus — I like working in gaming, crypto, and DeFi, and solving real-world UX challenges at scale
+
+I’m a Senior Fullstack JavaScript Dev, focused on building high-performing frontend applications using React and TypeScript. Most relevantly, I recently worked with a Maltese iGaming company — where I contributed to the development of a crypto casino platform.
 
 That project had no fiat onramps, no KYC, and no banks — users could deposit and withdraw Bitcoin directly, and the games were provably fair.
 
@@ -8,9 +10,7 @@ I was brought on to help shape the frontend architecture, and we built everythin
 
 Before that, I’ve worked across a range of industries — and led frontend teams, shipped PWAs, and built full platforms using modern CI/CD and containerized deployments. I’m especially interested in modular, composable frontend systems and collaborative product development.
 
-What draws me to blockchain iGaming and Web3 is the combination of technical ambition and product focus — I like working in gaming, crypto, and DeFi, and solving real-world UX challenges at scale.
-
-## Crypto Casino – Technology Overview (Non-Technical)
+## Crypto Casino Project – Technology Overview (Non-Technical)
 
 This demo simulates a simple online dice game where users connect their cryptocurrency wallet, roll a dice, and see the result. Behind the scenes, it uses modern tools to ensure the game is **fair**, **secure**, and **transparent**.
 
