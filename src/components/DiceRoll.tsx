@@ -109,7 +109,11 @@ export default function DiceRoll() {
 
   return (
     <Card variant="outlined">
-      <CardHeader title="🎲 Provably Fair Dice Game" />
+      <CardHeader 
+        avatar={"🎲"}
+        title="Provably Fair Dice Game" 
+        subheader="Honest, guv."  
+      />
       <CardContent>
         <Stack spacing={3}>
           <Box display="flex" justifyContent="center" fontSize="4rem">
